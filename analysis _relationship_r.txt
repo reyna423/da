@@ -1,0 +1,41 @@
+# Load libraries
+library(ggplot2)
+library(GGally)
+library(corrplot)
+
+# Load dataset
+data <- mtcars
+head(data)
+
+# -----------------------------
+# 1. Correlation Matrix
+# -----------------------------
+cor_matrix <- cor(data)
+print(cor_matrix)
+
+# Visualize correlation matrix
+corrplot(cor_matrix, method = "color", 
+         type = "upper", tl.col = "black", tl.srt = 45)
+
+# -----------------------------
+# 2. Pair Plot (scatterplot matrix)
+# -----------------------------
+# You can use ggpairs for a nice overview
+ggpairs(data[, c("mpg", "hp", "wt", "disp", "qsec")],
+        title = "Pairwise Relationships")
+
+# -----------------------------
+# 3. Scatter Plot with Regression Line
+# -----------------------------
+ggplot(data, aes(x = wt, y = mpg)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", color = "red") +
+  ggtitle("MPG vs Weight") +
+  xlab("Weight") +
+  ylab("Miles Per Gallon")
+
+
+download this package if not install
+
+    install.packages("GGally")
+install.packages("corrplot")

@@ -1,0 +1,54 @@
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+url = "https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv"
+df = pd.read_csv(url)
+
+# Show first few rows
+print(df.head())
+
+# ---------- 1. Histogram ----------
+plt.figure(figsize=(6,4))
+plt.hist(df['sepal_length'], bins=20, color='skyblue', edgecolor='black')
+plt.title('Histogram of Sepal Length')
+plt.xlabel('Sepal Length')
+plt.ylabel('Frequency')
+plt.show()
+
+# ---------- 2. Bar Chart ----------
+plt.figure(figsize=(6,4))
+sns.countplot(x='species', data=df, palette='Set2')
+plt.title('Count of Each Species')
+plt.show()
+
+# ---------- 3. Pie Chart ----------
+species_counts = df['species'].value_counts()
+plt.figure(figsize=(6,6))
+plt.pie(species_counts, labels=species_counts.index, autopct='%1.1f%%',
+        startangle=140, colors=['#66b3ff','#99ff99','#ffcc99'])
+plt.title('Species Distribution')
+plt.show()
+
+# ---------- 4. Box Plot ----------
+plt.figure(figsize=(6,4))
+sns.boxplot(x='species', y='petal_length', data=df, palette='Pastel1')
+plt.title('Boxplot of Petal Length by Species')
+plt.show()
+
+# ---------- 5. Violin Plot ----------
+plt.figure(figsize=(6,4))
+sns.violinplot(x='species', y='petal_width', data=df, palette='Set3')
+plt.title('Violin Plot of Petal Width by Species')
+plt.show()
+
+# ---------- 6. Regression Plot ----------
+plt.figure(figsize=(6,4))
+sns.regplot(x='sepal_length', y='sepal_width', data=df,
+            scatter_kws={'color':'blue'}, line_kws={'color':'red'})
+plt.title('Regression Plot: Sepal Length vs Sepal Width')
+plt.xlabel('Sepal Length')
+plt.ylabel('Sepal Width')
+plt.show()

@@ -1,0 +1,47 @@
+# Importing essential libraries
+import pandas as pd
+import numpy as np
+
+# Load the dataset
+url = "https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv"
+df = pd.read_csv(url)
+
+# Display first 5 rows
+print("🔹 First 5 rows:")
+print(df.head())
+
+# Check shape and data types
+print("\n🔹 Dataset Shape:", df.shape)
+print("\n🔹 Data Types:")
+print(df.dtypes)
+
+# Check for missing values
+print("\n🔹 Missing Values per Column:")
+print(df.isnull().sum())
+
+# Descriptive statistics
+print("\n🔹 Descriptive Statistics:")
+print(df.describe())
+
+# Group by species and compute mean
+print("\n🔹 Mean by Species:")
+print(df.groupby('species').mean())
+
+# Add a new column (e.g., sepal area)
+df['sepal_area'] = df['sepal_length'] * df['sepal_width']
+print("\n🔹 Added 'sepal_area' column:")
+print(df[['sepal_length', 'sepal_width', 'sepal_area']].head())
+
+# Find correlation matrix
+print("\n🔹 Correlation Matrix:")
+print(df.corr(numeric_only=True))
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Pairplot
+sns.pairplot(df, hue='species')
+plt.show()
+
+# Heatmap
+sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
+plt.show()

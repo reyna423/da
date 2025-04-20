@@ -1,0 +1,83 @@
+# Load Titanic dataset
+data <- read.csv("Titanic-Dataset.csv", stringsAsFactors = TRUE)
+
+# View basic info
+head(data)
+str(data)
+
+# Missing values
+cat("Total NA values:", sum(is.na(data)), "\n")
+colSums(is.na(data))
+
+# Impute Age with median
+data$Age[is.na(data$Age)] <- median(data$Age, na.rm = TRUE)
+
+# Summary stats
+summary(data)
+
+# Visualizations
+hist(data$Age, main="Age Histogram", xlab="Age", col="lightblue")
+boxplot(data$Age, main="Age Boxplot", col="orange")
+plot(data$Age, data$Fare, main="Age vs Fare", xlab="Age", ylab="Fare", col="blue")
+barplot(table(data$Survived), main="Survived Count", names.arg=c("No", "Yes"), col=c("red", "green"))
+
+
+https://www.kaggle.com/datasets/yasserh/titanic-dataset
+
+
+
+direct link of dataset
+
+
+# Load Titanic dataset directly from the URL
+data <- read.csv("https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv")
+
+# View first few rows
+head(data)
+
+# -------------------------------
+# Cleaning & Missing Value Check
+# -------------------------------
+# Total number of missing (NA) values
+cat("Total NA values:", sum(is.na(data)), "\n")
+
+# Missing values per column
+colSums(is.na(data))
+
+# -------------------------------
+# Descriptive Statistics
+# -------------------------------
+# Structure of the data
+str(data)
+
+# Summary statistics
+summary(data)
+
+# Dimensions of the dataset
+dim(data)
+
+# -------------------------------
+# Visualizations
+# -------------------------------
+
+# 1. Scatter Plot: Age vs Fare
+plot(data$Age, data$Fare,
+     main = "Age vs Fare",
+     xlab = "Age",
+     ylab = "Fare",
+     col = "blue",
+     pch = 19)
+
+# 2. Histogram: Age
+hist(data$Age,
+     main = "Histogram of Age",
+     xlab = "Age",
+     col = "skyblue",
+     border = "white")
+
+# 3. Boxplot: Fare by Class
+boxplot(Fare ~ Pclass, data = data,
+        main = "Boxplot of Fare by Class",
+        xlab = "Passenger Class",
+        ylab = "Fare",
+        col = c("orange", "lightgreen", "skyblue"))
